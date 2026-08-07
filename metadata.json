@@ -1,0 +1,6 @@
+{
+  "name": "BlockPay AI",
+  "description": "Simulated UPI, Agent Commerce & Algorand Blockchain Payment Platform with AI Fraud Detection, x402 Protocol, and Policy Engine.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
