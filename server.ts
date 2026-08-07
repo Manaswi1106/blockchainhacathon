@@ -6,8 +6,7 @@ import { GoogleGenAI } from "@google/genai";
 import { checkPaymentPolicy } from "./services/policyEngine";
 const app = express();
 import cors from "cors";
-app.use(cors());
-app.use(express.json());
+
 app.use(cors({
   origin: [
     "http://localhost:5173",
@@ -16,8 +15,8 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(express.json());
-const PORT = Number(process.env.PORT) || 3000;
+
+
 import {
   createAlgorandTransaction,
   getBlockchainStatus
@@ -39,7 +38,7 @@ const ai = process.env.GEMINI_API_KEY
       },
     })
   : null;
-
+const PORT = Number(process.env.PORT) || 3000;
 // Robust helper to invoke Gemini AI with automatic model fallback and error suppression
 async function generateAiText(prompt: string): Promise<string | null> {
   if (!ai) return null;
