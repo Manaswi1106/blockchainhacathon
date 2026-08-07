@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UserAccount } from '../types';
 import { Bot, Send, Sparkles, Cpu, X, User } from 'lucide-react';
-
+import { API } from "../utils/api";
 interface AIAgentAssistantModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -37,7 +37,7 @@ export const AIAgentAssistantModal: React.FC<AIAgentAssistantModalProps> = ({
     setIsTyping(true);
 
     try {
-      const res = await fetch('/api/agent/chat', {
+      const res = await fetch(`${API}/api/agent/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userText, userId: user.id }),

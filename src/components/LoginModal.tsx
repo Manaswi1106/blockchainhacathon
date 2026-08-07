@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { UserAccount } from '../types';
 import { Smartphone, Lock, X, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
-
+import { API } from "../utils/api";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -32,7 +32,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
 
     try {
-      const res = await fetch('/api/auth/otp', {
+      const res = await fetch(`${API}/api/auth/otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone }),
@@ -53,7 +53,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await fetch('/api/auth/verify-otp', {
+      const res = await fetch(`${API}/api/auth/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone, otp }),

@@ -5,8 +5,8 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import { checkPaymentPolicy } from "./services/policyEngine";
 const app = express();
-const PORT = 3000;
 
+const PORT = Number(process.env.PORT) || 3000;
 import {
   createAlgorandTransaction,
   getBlockchainStatus

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { UserAccount, FraudAnalysisResult } from '../types';
+import { API } from "../utils/api"; 
 import {
   X,
   Send,
@@ -159,7 +160,7 @@ export const SendMoneyModal: React.FC<SendMoneyModalProps> = ({
       const numAmount = parseFloat(amount);
 
       // 1. AI Fraud Engine Check
-      const fraudRes = await fetch('/api/pay/fraud-check', {
+      const fraudRes = await fetch(`${API}/api/pay/fraud-check`,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -177,7 +178,7 @@ export const SendMoneyModal: React.FC<SendMoneyModalProps> = ({
 
       // 2. x402 Authorization
       setProcessStage('X402_AUTH');
-      const x402Res = await fetch('/api/x402/authorize', {
+      const x402Res = await fetch(`${API}/api/x402/authorize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -193,7 +194,7 @@ export const SendMoneyModal: React.FC<SendMoneyModalProps> = ({
 
       // 3. Algorand Ledger Commit & Payment Execution
       setProcessStage('ALGORAND_BLOCK');
-      const payRes = await fetch('/api/pay/execute', {
+      const payRes = await fetch(`${API}/api/pay/execute`,  {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

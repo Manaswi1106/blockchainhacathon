@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AlgorandBlock, PaymentTransaction } from '../types';
+import { API } from "../utils/api";
 import {
   Boxes,
   Search,
@@ -31,7 +32,7 @@ export const BlockchainExplorer: React.FC<BlockchainExplorerProps> = ({ transact
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('/api/blockchain/stats');
+      const res = await fetch(`${API}/api/blockchain/stats`);
       const data = await res.json();
       if (data.success) {
         setStats(data);

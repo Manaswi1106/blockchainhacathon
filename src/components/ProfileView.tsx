@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { UserAccount } from '../types';
 import { QRCodeGenerator } from './QRCodeGenerator';
+import { API } from "../utils/api";
 import {
   User,
   ShieldCheck,
@@ -41,7 +42,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
     }
 
     try {
-      const res = await fetch('/api/users/update-pin', {
+      const res = await fetch(`${API}/api/users/update-pin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, currentPin, newPin }),

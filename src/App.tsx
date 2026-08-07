@@ -16,7 +16,7 @@ import { ProfileView } from './components/ProfileView';
 import { SpendingAnalytics } from './components/SpendingAnalytics';
 import { Smartphone, CheckCircle2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-
+import { API } from "./utils/api";
 export default function App() {
   const [allUsers, setAllUsers] = useState<UserAccount[]>([]);
   const [activeUser, setActiveUser] = useState<UserAccount | null>(null);
@@ -41,7 +41,7 @@ export default function App() {
   // Initial Fetch Data from Backend Express Server
   const loadData = async () => {
     try {
-      const usersRes = await fetch('/api/users');
+      const usersRes = await fetch(`${API}/api/users`);
       const usersData = await usersRes.json();
       if (usersData.success && usersData.users.length > 0) {
         setAllUsers(usersData.users);
@@ -53,13 +53,13 @@ export default function App() {
         }
       }
 
-      const txRes = await fetch('/api/transactions');
+      const txRes = await fetch(`${API}/api/transactions`);
       const txData = await txRes.json();
       if (txData.success) {
         setTransactions(txData.transactions);
       }
 
-      const smsRes = await fetch('/api/sms');
+      const smsRes = await fetch(`${API}/api/sms`);
       const smsData = await smsRes.json();
       if (smsData.success) {
         setSmsList(smsData.smsList);

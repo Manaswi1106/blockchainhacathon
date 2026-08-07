@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { UserAccount, SpendingPolicy } from '../types';
+import { API } from "../utils/api";
 import {
   ShieldCheck,
   X,
@@ -35,7 +36,7 @@ export const PolicyEngineModal: React.FC<PolicyEngineModalProps> = ({
 
   const handleSave = async () => {
     try {
-      const res = await fetch('/api/users/update-policy', {
+      const res = await fetch(`${API}/api/users/update-policy`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, policy }),
