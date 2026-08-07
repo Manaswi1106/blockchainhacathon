@@ -5,7 +5,18 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import { checkPaymentPolicy } from "./services/policyEngine";
 const app = express();
+import cors from "cors";
+app.use(cors());
+app.use(express.json());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://blockchainhacathon.vercel.app"
+  ],
+  credentials: true,
+}));
 
+app.use(express.json());
 const PORT = Number(process.env.PORT) || 3000;
 import {
   createAlgorandTransaction,
